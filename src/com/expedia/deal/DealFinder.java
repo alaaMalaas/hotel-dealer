@@ -13,6 +13,7 @@ import com.expedia.jsonDTOs.Hotel;
 import com.expedia.jsonDTOs.Resultant;
 import com.google.gson.Gson;
 import java.net.URL;
+
 import net.htmlparser.jericho.Source;
 
 /**
@@ -69,11 +70,16 @@ public class DealFinder extends HttpServlet {
 
 	
 
+
+
 	private String readJsonFromURL(String Url) throws Exception {
 		URL url = new URL(Url);
 		Source source = new Source(url);
 		return source.toString();
 	}
+	
+	
+	
 
 	private String appendQueryParametersTOUri(HttpServletRequest req) {
 		StringBuilder uriWithParameters = new StringBuilder(URL);
@@ -82,9 +88,7 @@ public class DealFinder extends HttpServlet {
 
 		if(req.getParameter("minTripStartDate")!=null&& !req.getParameter("minTripStartDate").isEmpty())
 			uriWithParameters.append("&" + "travelStartDate=" + "{\"gt\":" + req.getParameter("minTripStartDate"));
-		else {
-			uriWithParameters.append("&" + "travelStartDate={\"gt\": 0");
-		}
+	
 		if(req.getParameter("maxTripStartDate")!=null && !req.getParameter("maxTripStartDate").isEmpty())
 			uriWithParameters.append(",\"lt\":"+req.getParameter("maxTripStartDate"));
 		uriWithParameters.append("}");
@@ -94,10 +98,7 @@ public class DealFinder extends HttpServlet {
 		
 		
 		if(req.getParameter("minStarRating")!=null && !req.getParameter("minStarRating").isEmpty())
-			uriWithParameters.append("&" + "hotelStarRating={\"gt\":" + req.getParameter("minStarRating"));
-		else {
-			uriWithParameters.append("&" + "hotelStarRating={\"gt\": 0");
-		}
+		
 		if(req.getParameter("maxStarRating")!=null && !req.getParameter("maxStarRating").isEmpty())
 			uriWithParameters.append(",\"lt\":"+req.getParameter("maxStarRating"));
 		uriWithParameters.append("}");
@@ -106,9 +107,7 @@ public class DealFinder extends HttpServlet {
 		
 		if(req.getParameter("minTotalRate")!=null &&!req.getParameter("minTotalRate").isEmpty())
 			uriWithParameters.append("&" + "hotelReviewTotal=" + "{\"gt\":" + req.getParameter("minTotalRate"));
-		else {
-			uriWithParameters.append("&" + "hotelReviewTotal={\"gt\": 0");
-		}
+		
 		if(req.getParameter("maxTotalRate")!=null && !req.getParameter("maxTotalRate").isEmpty())
 			uriWithParameters.append(",\"lt\":"+req.getParameter("maxTotalRate"));
 		uriWithParameters.append("}");
@@ -116,9 +115,7 @@ public class DealFinder extends HttpServlet {
 		
 		if(req.getParameter("minGuestRating")!=null && !req.getParameter("minGuestRating").isEmpty())
 			uriWithParameters.append("&" + "hotelGuestReviewRating={\"gt\":" + req.getParameter("minGuestRating"));
-		else {
-			uriWithParameters.append("&" + "hotelGuestReviewRating={\"gt\": 0");
-		}
+		
 		if(req.getParameter("maxGuestRating")!=null && !req.getParameter("maxGuestRating").isEmpty())
 			uriWithParameters.append(",\"lt\":"+req.getParameter("maxGuestRating"));
 		
